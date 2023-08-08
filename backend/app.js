@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const { celebrate, Joi, errors } = require('celebrate');
-const cors = require('./middlewares/cors');
+const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const userRouter = require('./routes/users');
 const { login, createUser } = require('./controllers/users');
@@ -12,11 +12,16 @@ const cardRouter = require('./routes/cards');
 const auth = require('./middlewares/auth');
 const { STATUS_CODE_DEFAULT_ERROR } = require('./errors/errors');
 const NotFound = require('./errors/notFound');
-
+const allowedCors = [
+  'http://pogodina.nomoreparties.co',
+  'https://pogodina.nomoreparties.co',
+  'http://localhost:3000',
+  'http://localhost:3001',
+];
 const { PORT = 3000 } = process.env;
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 app.use(express.json());
-app.use(cors);
+app.use(cors(allowedCors));
 app.use(requestLogger);
 app.post('/signup', celebrate({
   body: Joi.object().keys({
