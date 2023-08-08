@@ -100,7 +100,7 @@ class Api {
 }
 
 const api = new Api({
-  url: 'http://localhost:3000',
+  url: 'https://api.pogodina.nomoreparties.co',
   userID: `Bearer ${localStorage.getItem('jwt')}`,
 });
 
