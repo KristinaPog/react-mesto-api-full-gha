@@ -1,7 +1,6 @@
 const allowedCors = [
-  'https://praktikum.tk',
-  'http://api.pogodina.nomoreparties.co',
-  'https://api.pogodina.nomoreparties.co',
+  'http://pogodina.nomoreparties.co',
+  'https://pogodina.nomoreparties.co',
   'http://localhost:3000',
   'http://localhost:3001',
 ];
