@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
@@ -25,7 +25,6 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [userEmail, setUserEmail] = React.useState('');
   const navigate = useNavigate();
-  
 
   React.useEffect(() => {
     Promise.all([api.getInitialCards(), api.getUserInfo()])
@@ -54,7 +53,7 @@ function App() {
           if (res) {
             setLoggedIn(true);
             navigate("/", { replace: true });
-            setUserEmail(res.data.email);
+            setUserEmail(res.email);
           }
           return;
         })
@@ -105,7 +104,7 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
       setCards((state) => state.map((c) => c._id === card._id ? newCard : c))
     })
@@ -115,7 +114,7 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    if (card.owner._id === currentUser._id) {
+    if (card.owner === currentUser._id) {
       api.deleteCard(card._id)
         .then(setCards(cards => cards.filter((c) => c._id !== card._id)))
         .catch((err) => {

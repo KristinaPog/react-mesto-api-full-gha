@@ -1,6 +1,6 @@
 
 class Api {
-  constructor(userID, url) {
+  constructor({userID, url}) {
     this._user = userID;
     this._url = url;
   }
@@ -13,7 +13,7 @@ class Api {
   }
 
   getInitialCards() {
-    return fetch(`${this._url}cards`, {
+    return fetch(`${this._url}/cards`, {
       method: "GET",
       headers: {
         authorization: this._user
@@ -23,7 +23,7 @@ class Api {
   }
 
   setNewCard(cardData) {
-    return fetch(`${this._url}cards`, {
+    return fetch(`${this._url}/cards`, {
       method: "POST",
       headers: {
         authorization: this._user,
@@ -38,7 +38,7 @@ class Api {
   }
 
   getUserInfo() {
-    return fetch(`${this._url}users/me`, {
+    return fetch(`${this._url}/users/me`, {
       method: "GET",
       headers: {
         authorization: this._user
@@ -48,7 +48,7 @@ class Api {
   }
 
   setUserInfo(userInfo) {
-    return fetch(`${this._url}users/me`, {
+    return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: {
         authorization: this._user,
@@ -63,7 +63,7 @@ class Api {
   }
 
   setAvatar(userInfo) {
-    return fetch(`${this._url}users/me/avatar `, {
+    return fetch(`${this._url}/users/me/avatar `, {
       method: "PATCH",
       headers: {
         authorization: this._user,
@@ -77,7 +77,7 @@ class Api {
   }
 
   changeLikeCardStatus(cardId, isLiked) {
-    return fetch(`${this._url}cards/${cardId}/likes`, {
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: `${!isLiked ? 'DELETE' : 'PUT'}`,
       headers: {
         authorization: this._user,
@@ -88,7 +88,7 @@ class Api {
   }
 
   deleteCard(cardId) {
-    return fetch(`${this._url}cards/${cardId} `, {
+    return fetch(`${this._url}/cards/${cardId} `, {
       method: "DELETE",
       headers: {
         authorization: this._user,
@@ -99,7 +99,9 @@ class Api {
   }
 }
 
-const api = new Api('06e18fd4-8469-488a-86d3-e71284eb84c0', 'https://mesto.nomoreparties.co/v1/cohort-65/');
-
+const api = new Api({
+  url: 'http://localhost:3001',
+  userID: `Bearer ${localStorage.getItem('jwt')}`,
+});
 
 export default api;
