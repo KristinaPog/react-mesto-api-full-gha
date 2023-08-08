@@ -100,7 +100,7 @@ class Api {
 }
 
 const api = new Api({
-  url: 'http://localhost:3001',
+  url: 'http://localhost:3000',
   userID: `Bearer ${localStorage.getItem('jwt')}`,
 });
 

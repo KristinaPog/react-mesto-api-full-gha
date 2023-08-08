@@ -43,7 +43,7 @@ function App() {
 
   React.useEffect(() => {
     checkToken();
-  }, [])
+  })
 
   const checkToken = () => {
     const jwt = localStorage.getItem('jwt');
