@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.105.8
+IP-адрес <158.160.105.8>
 
 Frontend https://pogodina.nomoreparties.co
 
