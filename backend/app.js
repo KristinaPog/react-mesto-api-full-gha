@@ -12,6 +12,7 @@ const cardRouter = require('./routes/cards');
 const auth = require('./middlewares/auth');
 const { STATUS_CODE_DEFAULT_ERROR } = require('./errors/errors');
 const NotFound = require('./errors/notFound');
+
 const allowedCors = [
   'http://pogodina.nomoreparties.co',
   'https://pogodina.nomoreparties.co',
@@ -23,6 +24,11 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 app.use(express.json());
 app.use(cors(allowedCors));
 app.use(requestLogger);
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 app.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email({ tlds: { allow: false } }),
