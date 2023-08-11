@@ -27,7 +27,7 @@ function App() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    Promise.all([api.getInitialCards(), api.getUserInfo()])
+    loggedIn && Promise.all([api.getInitialCards(), api.getUserInfo()])
       .then(([data, userData]) => {
         setCurrentUser(userData);
         setCards(data.map(item => ({
@@ -39,7 +39,7 @@ function App() {
         })));
       })
       .catch((error) => { console.log(`Ошибка: ${error}`) })
-  }, []);
+  }, [loggedIn]);
 
   React.useEffect(() => {
     checkToken();
