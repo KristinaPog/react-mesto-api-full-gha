@@ -26,11 +26,6 @@ function App() {
   const navigate = useNavigate();
   
   React.useEffect(() => {
-    checkToken();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  React.useEffect(() => {
     loggedIn && Promise.all([api.getInitialCards(), api.getUserInfo()])
       .then(([data, userData]) => {
         setCurrentUser(userData);
@@ -63,6 +58,11 @@ function App() {
         });
     }
   }
+
+  React.useEffect(() => {
+    checkToken();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
