@@ -103,7 +103,7 @@ class Api {
 
 const api = new Api({
   url: 'https://api.pogodina.nomoreparties.co',
-  userID: `Bearer ${localStorage.getItem('token')}`,
+  userID: `Bearer ${localStorage.getItem('jwt')}`,
 });
 
 export default api;
