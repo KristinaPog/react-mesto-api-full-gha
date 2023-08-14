@@ -1,7 +1,6 @@
 
 class Api {
   constructor({userID, url}) {
-    this._user = userID;
     this._url = url;
   }
 
@@ -16,7 +15,7 @@ class Api {
     return fetch(`${this._url}/cards`, {
       method: "GET",
       headers: {
-        authorization: this._user,        
+        authorization: `Bearer ${localStorage.getItem('jwt')}`,        
         'Content-Type': 'application/json'
       }
     })
@@ -27,7 +26,7 @@ class Api {
     return fetch(`${this._url}/cards`, {
       method: "POST",
       headers: {
-        authorization: this._user,
+        authorization: `Bearer ${localStorage.getItem('jwt')}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -42,7 +41,7 @@ class Api {
     return fetch(`${this._url}/users/me`, {
       method: "GET",
       headers: {
-        authorization: this._user,
+        authorization: `Bearer ${localStorage.getItem('jwt')}`,
         'Content-Type': 'application/json'
       }
     })
@@ -53,7 +52,7 @@ class Api {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: {
-        authorization: this._user,
+        authorization: `Bearer ${localStorage.getItem('jwt')}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -68,7 +67,7 @@ class Api {
     return fetch(`${this._url}/users/me/avatar `, {
       method: "PATCH",
       headers: {
-        authorization: this._user,
+        authorization: `Bearer ${localStorage.getItem('jwt')}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -82,7 +81,7 @@ class Api {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: `${!isLiked ? 'DELETE' : 'PUT'}`,
       headers: {
-        authorization: this._user,
+        authorization: `Bearer ${localStorage.getItem('jwt')}`,
         'Content-Type': 'application/json'
       }
     })
@@ -93,7 +92,7 @@ class Api {
     return fetch(`${this._url}/cards/${cardId} `, {
       method: "DELETE",
       headers: {
-        authorization: this._user,
+        authorization: `Bearer ${localStorage.getItem('jwt')}`,
         'Content-Type': 'application/json'
       }
     })
@@ -103,7 +102,6 @@ class Api {
 
 const api = new Api({
   url: 'https://api.pogodina.nomoreparties.co',
-  userID: `Bearer ${localStorage.getItem('jwt')}`,
 });
 
 export default api;

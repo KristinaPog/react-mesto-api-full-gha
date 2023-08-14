@@ -164,8 +164,6 @@ function App() {
             onAddPlace={handleAddPlaceSubmit}
           />
 
-          
-
           <ImagePopup card={selectedCard} isOpen={selectedCard} onClose={closeAllPopups}></ImagePopup>
         </div>
       </div>
