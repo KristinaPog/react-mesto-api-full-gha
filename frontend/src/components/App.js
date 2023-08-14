@@ -14,7 +14,6 @@ import Register from './Register.js';
 import ProtectedRouteElement from './ProtectedRoute.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js'
 
-
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
@@ -25,6 +24,11 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [userEmail, setUserEmail] = React.useState('');
   const navigate = useNavigate();
+  
+  React.useEffect(() => {
+    checkToken();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   React.useEffect(() => {
     loggedIn && Promise.all([api.getInitialCards(), api.getUserInfo()])
@@ -40,11 +44,6 @@ function App() {
       })
       .catch((error) => { console.log(`Ошибка: ${error}`) })
   }, [loggedIn]);
-
-  React.useEffect(() => {
-    checkToken();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const checkToken = () => {
     const jwt = localStorage.getItem('jwt');
